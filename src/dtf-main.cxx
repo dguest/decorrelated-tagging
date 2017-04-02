@@ -13,7 +13,7 @@ input_t dummy_feature_map() {
   return {
     {"inputs", {
         {"jet_pt_log1p", std::log1p(1)},
-        {"jet_m_log1p", 1},
+        {"jet_m_log1p", std::log1p(1)},
         {"jet_eta", 1},
         {"jet_phi", 1},
         {"photon_E_log1p", std::log1p(1)},

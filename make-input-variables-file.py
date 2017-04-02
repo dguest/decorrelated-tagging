@@ -1,5 +1,8 @@
-#!/usr/bin/env python3.6
+#!/usr/bin/env python3
 
+"""This scirpt dumps the input 'variables' file needed to run the
+lwtnn converter kerasfunc2json.py.
+"""
 import argparse
 from numpy import array
 from numpy import inf, nan
@@ -8,6 +11,7 @@ from json import dumps
 from sys import stdout
 from generator import STATS
 
+# Took this from Peter's generator
 def get_offset_scale_and_transform(i):
     if STATS['skew'][i] > 1.0:
         transform = 'log1p'
@@ -45,8 +49,12 @@ def run():
     }
     for fnum, fname in enumerate(FEATURES):
         offset, scale, transform = get_offset_scale_and_transform(fnum)
+        if transform:
+            name = '{}_{}'.format(fname, transform)
+        else:
+            name = fname
         feature = {
-            "name": fname if not transform else f'{fname}_{transform}',
+            "name": name,
             "offset": offset,
             "scale": scale,
         }
