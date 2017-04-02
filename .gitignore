@@ -3,6 +3,8 @@
 /build
 /lib
 
+__pycache__
+
 # ignore common data file types
 *.yml
 *.yaml
