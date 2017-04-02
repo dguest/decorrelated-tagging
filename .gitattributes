@@ -1,2 +1,2 @@
-data/ filter=lfs diff=lfs merge=lfs -crlf
-data/dtf.json filter=lfs diff=lfs merge=lfs -crlf
+data/* filter=lfs diff=lfs merge=lfs -crlf
+
