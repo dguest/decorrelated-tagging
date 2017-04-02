@@ -6,24 +6,14 @@ alias setupATLAS='source ${ATLAS_LOCAL_ROOT_BASE}/user/atlasLocalSetup.sh'
 
 echo -n "setting up eigen and boost..."
 setupATLAS -q
+localSetupROOT -q
 localSetupSFT -q releases/LCG_84/eigen/3.2.7
 localSetupBoost -q boost-1.60.0-python2.7-x86_64-slc6-gcc49
 EIGEN_INC=$SFT_HOME_eigen/include/eigen3
 BOOST_INC=$ALRB_BOOST_ROOT/include
-export LWTNN_CXX_FLAGS="-I$(EIGEN_INC) -I$(BOOST_INC)"
-echo "done"
+export LWTNN_CXX_FLAGS="-I${EIGEN_INC} -I${BOOST_INC}"
+echo -e "done\n"
 
-if [[ ! type git-lfs ]] ; then
-    echo "getting git lfs"
-    wget https://github.com/git-lfs/git-lfs/releases/download/v2.0.2/git-lfs-linux-amd64-2.0.2.tar.gz
-    cat <<EOF
-put git-lfs somewhere in your PATH, and run
-
-```
-./git-lfs install
-```
-
-then run `git lfs pull` from this directory
-
-EOF
+if ! type git-lfs &> /dev/null ; then
+    echo "run get-git-lfs.sh to get input data"
 fi

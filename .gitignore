@@ -3,7 +3,9 @@
 /build
 /lib
 
+# stuff for other requirements
 __pycache__
+git-lfs*
 
 # ignore common data file types
 *.yml
