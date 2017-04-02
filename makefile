@@ -53,17 +53,27 @@ GEN_OBJ_PATHS := $(filter-out $(BUILD)/$(EXE_PREFIX)%.o,$(GEN_OBJ_PATHS))
 # add to all top level
 ALL_TOP_LEVEL += $(ALL_EXE_PATHS)
 
+# lwtnn
+LWT = lwtnn/lib/liblwtnn.so
+CXXFLAGS += -Ilwtnn/include
+
 # --- first call here
 all: $(ALL_TOP_LEVEL)
+
+$(LWT):
+	@echo " -- building lwtnn -- "
+	@$(MAKE) -C lwtnn
+	@echo " -- done building lwtnn -- "
+
 
 # _______________________________________________________________
 # Add Build Rules
 
 # build exe
-$(OUTPUT)/$(EXE_PREFIX)%: $(GEN_OBJ_PATHS) $(BUILD)/$(EXE_PREFIX)%.o
+$(OUTPUT)/$(EXE_PREFIX)%: $(GEN_OBJ_PATHS) $(BUILD)/$(EXE_PREFIX)%.o $(LWT)
 	@mkdir -p $(OUTPUT)
 	@echo "linking $^ --> $@"
-	@$(CXX) -o $@ $^ $(LIBS) $(LDFLAGS)
+	@$(CXX) -o $@ $(filter-out (LWT),$^) $(LIBS) $(LDFLAGS)
 
 # compile rule
 $(BUILD)/%.o: %.cxx
@@ -93,6 +103,7 @@ CLEANLIST     = *~ *.o *.o~ *.d core
 clean:
 	rm -fr $(CLEANLIST) $(CLEANLIST:%=$(BUILD)/%) $(CLEANLIST:%=$(DEP)/%)
 	rm -fr $(BUILD) $(DICT) $(OUTPUT)
+	make -C lwtnn clean
 
 rmdep:
 	rm -f $(DEP)/*.d

@@ -1,0 +1,16 @@
+# ignore some subdirectories
+/bin
+/build
+/lib
+
+# ignore common data file types
+*.yml
+*.yaml
+*.json
+*.txt
+*.h5
+*.tgz
+*.gz
+
+# don't ignore in data
+!/data/*
