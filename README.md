@@ -4,7 +4,7 @@ Decorrelated Tagging Functions
 You can get this code by running
 
 ```bash
-git clone --recursive git@github.com:dguest/dtf-example.git
+git clone --recursive git@github.com:dguest/decorrelated-tagging.git
 ```
 
 Quickstart
@@ -39,6 +39,8 @@ attached script to fix this on any machine with cvmfs. Just run
 ```bash
 . setup-on-cvmfs-systems.sh
 ```
+The good news is that these libraries are header only: once you've
+compiled lwtnn you don't need this step.
 
 Regenerating the NN configuration
 ---------------------------------
